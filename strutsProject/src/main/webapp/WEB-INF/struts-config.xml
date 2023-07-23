@@ -1,0 +1,76 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+	"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+		<!-- action Form Login -->
+		<form-bean name="ActionForm"
+			type="actionform.LoginActionForm" />
+		<form-bean name="JoinActionForm"
+			type="actionform.JoinActionForm" />
+		<form-bean name="writeActionForm"
+			type="actionform.writeActionForm" />
+		<form-bean name="UpdateActionForm"
+			type="actionform.UpdateActionForm" />
+		<form-bean name="DeleteActionForm"
+			type="actionform.DeleteActionForm" />
+	</form-beans>
+	<action-mappings>
+		<action path="/LoginForm" forward="/LoginForm.jsp" />
+		<action path="/JoinForm" forward="/JoinForm.jsp" />
+
+		<action name="ActionForm" path="/ActionForm"
+			type="login.LoginAction" validate="true" scope="request">
+			<forward name="bbs" path="/bbs.jsp" />
+			<forward name="fail" path="/LoginForm.jsp" />
+		</action>
+
+		<action name="JoinActionForm" path="/JoinActionForm"
+			type="login.JoinAction" validate="true" scope="request">
+			<forward name="LoginForm" path="/LoginForm.jsp" />
+			<forward name="fail" path="/LoginForm.jsp" />
+		</action>
+
+		
+
+		<action path="/main" type="login.mainAction" parameter="method">
+			<forward name="main" path="/LoginForm.jsp" />
+		</action>
+
+
+
+		<action name="UpdateActionForm" path="/UpdateActionForm"
+			type="bbs.updateAction" validate="true" scope="request"
+			parameter="method">
+			<forward name="bbs" path="/bbs.jsp" />
+			<forward name="fail" path="/LoginForm.jsp" />
+		</action>
+
+		<action name="writeActionForm" path="/writeActionForm"
+			type="bbs.writeAction" validate="true" scope="request">
+			<forward name="bbs" path="/bbs.jsp" />
+			<forward name="fail" path="/LoginForm.jsp" />
+		</action>
+
+		<action name="DeleteActionForm" path="/DeleteActionForm"
+			type="bbs.deleteAction" validate="true" scope="request">
+			<forward name="bbs" path="/bbs.jsp" />
+			<forward name="fail" path="/LoginForm.jsp" />
+		</action>
+		
+
+		<action path="/View" forward="/view.jsp" />
+		<action path="/write" forward="/write.jsp" />
+		<!-- actionForm을 쓸 때는 form-bean의 name과 action의 name이 같아야한다. -->
+		<action path="/Update" forward="/update.jsp" />
+		<action path="/bbs" forward="/bbs.jsp" />
+
+	</action-mappings>
+	<controller />
+	<message-resources parameter="test" />
+
+</struts-config>
